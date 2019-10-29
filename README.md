@@ -105,7 +105,9 @@ module.exports = {
 
 ## final step 
 
-create folder [src]  and to transfer flie # src/index.js
+create folder src  and to transfer flie src/index.js
 
 ## after 
-restart project # yarn start-ios # or # yarn start-android
+restart project  yarn start-ios  or yarn start-android
+
+[more informations](https://medium.com/@jamiehalvorson/react-native-eslint-setup-63d02076261)
