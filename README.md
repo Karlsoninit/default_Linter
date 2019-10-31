@@ -91,16 +91,13 @@ module.exports = {
 ## add to scripts 
 
 ``` scripts
-module.exports = {
-  singleQuote: true,
-  printWidth: 120,
-  tabWidth: 2,
-  trailingComma: 'none',
-  bracketSpacing: true,
-  semi: false,
-  useTabs: false,
-  jsxBracketSameLine: false
-}
+"scripts": {
+   "ios": "react-native run-ios --simulator='iPhone SE'",
+   "android": "react-native run-android",
+   "lint": "esw src/**",
+   "lint-watch": "esw -w --changed src/**"
+ },
+"precommit": "lint",
 ```
 
 ## final step 
