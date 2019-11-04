@@ -78,8 +78,17 @@ export default function App() {
       />
       <Button title="Submit" onPress={handleSubmit} />
       {tasks.map((task, indx) => (
-        <Text key={indx}>{task}</Text>
+        <View style={styles.taskContainer}>
+          <Text key={indx}>{task}</Text>
+        </View>
       ))}
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  taskContainer: {
+    width: "100%",
+    backgroundColor: "yellow"
+  }
+});
