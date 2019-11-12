@@ -1,51 +1,34 @@
-import React, { Component } from "react";
-import { StyleSheet, Text, View, Button } from "react-native";
+import React from "react";
+import { StyleSheet, Text, View } from "react-native";
 
-// export default function App() {
-//   return (
-//     <View style={styles.container}>
-//       <Text style={styles.text}>
-//         Open up App.js to start working on your first app !
-//       </Text>
-//       <Button title="click me please" onPress={this.handlePress} />
-//     </View>
-//   );
-// }
-
-export default class App extends Component {
-  state = {
-    isOpen: false
-  };
-
-  handlePress = () => {
-    this.setState(({ isOpen }) => ({
-      isOpen: !isOpen
-    }));
-  };
-  render() {
-    const { isOpen } = this.state;
-    return (
-      <View style={styles.container}>
-        {isOpen && (
-          <Text style={styles.text}>
-            Open up App.js to start working on your first app !
-          </Text>
-        )}
-        <Button title="click me please" onPress={this.handlePress} />
-      </View>
-    );
-  }
-}
+const App = () => {
+  return (
+    <View style={styles.container}>
+      <Text style={styles.textStyle}>default assembly</Text>
+      <Text style={styles.descriptions}>
+        before create new project, you can create new branch and use default
+        assembly
+      </Text>
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
     justifyContent: "center",
-    color: "red"
+    alignItems: "center",
+    padding: 10
   },
-  text: {
-    color: "red"
+  textStyle: {
+    color: "tomato",
+    fontSize: 30,
+    marginBottom: 20
+  },
+  descriptions: {
+    fontSize: 12,
+    color: "black"
   }
 });
+
+export default App;
