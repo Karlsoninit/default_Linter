@@ -2,6 +2,7 @@ import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 
 const App = () => {
+  console.log("app");
   return (
     <View style={styles.container}>
       <Text style={styles.textStyle}>default assembly</Text>
