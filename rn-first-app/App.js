@@ -1,15 +1,14 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
+import Header from "./components/Header/Header";
+import Screen from "./components/Screens/Screens";
 
 const App = () => {
-  console.log("app");
+  console.log("guess number");
   return (
     <View style={styles.container}>
-      <Text style={styles.textStyle}>default assembly</Text>
-      <Text style={styles.descriptions}>
-        before create new project, you can create new branch and use default
-        assembly
-      </Text>
+      <Header title={"guess game"} />
+      <Screen />
     </View>
   );
 };
@@ -17,18 +16,8 @@ const App = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
     alignItems: "center",
-    padding: 10
-  },
-  textStyle: {
-    color: "tomato",
-    fontSize: 30,
-    marginBottom: 20
-  },
-  descriptions: {
-    fontSize: 12,
-    color: "black"
+    width: "100%"
   }
 });
 
