@@ -5,23 +5,57 @@ import {
   Button,
   StyleSheet,
   TouchableWithoutFeedback,
-  Keyboard
+  Keyboard,
+  Alert
 } from "react-native";
 import Input from "../Input/Input";
 import Card from "../Card/Card";
 import variables from "../../color/color";
+import ButtonContainer from "../NumberContainer";
 
 const Screen = () => {
   const [enteredValue, setEnteredValue] = useState("");
+  const [confirmed, setСonfirmed] = useState(false);
+  const [selectedNumber, setSelectedNumber] = useState("");
 
   const getInputValue = textValue => {
-    console.log(textValue);
-    setEnteredValue(textValue.replace(/[^0-9]/g, ""));
+    // console.log(textValue);
+    // setEnteredValue(textValue.replace(/[^0-9]/g, ""));
+    setEnteredValue(textValue);
   };
 
-  const confirm = () => {
-    console.log(enteredValue);
+  const resetInput = () => {
+    setEnteredValue("");
+    setСonfirmed(false);
   };
+
+  const confirmInputHandler = () => {
+    console.log("print enteredValue", enteredValue);
+    console.log("print enteredValue change isNaN", isNaN(enteredValue));
+    console.log("print enteredValue change is more then 0", !enteredValue > 0);
+    if (isNaN(enteredValue) || !enteredValue > 0) {
+      Alert.alert("Invalid number", "alert has been only numbers", [
+        { text: "Try again", onPress: () => resetInput, style: "cancel" }
+      ]);
+      setEnteredValue("");
+      setСonfirmed(false);
+      return;
+    }
+    setСonfirmed(true);
+    setSelectedNumber(enteredValue);
+    Keyboard.dismiss();
+  };
+
+  let confirmedOutput;
+
+  if (confirmed) {
+    confirmedOutput = (
+      <Card style={styles.summaryContainer}>
+        <ButtonContainer selectedNumber={selectedNumber} />
+        <Button title="START GAME" />
+      </Card>
+    );
+  }
 
   return (
     <TouchableWithoutFeedback
@@ -47,17 +81,18 @@ const Screen = () => {
             <Button
               style={styles.btn}
               title="Reset"
-              onPress={() => console.log("reset")}
+              onPress={resetInput}
               color={variables.rejected}
             />
             <Button
               style={styles.btn}
               title="Confirm"
-              onPress={() => console.log("Confirm")}
+              onPress={confirmInputHandler}
               color={variables.success}
             />
           </View>
         </Card>
+        {confirmedOutput}
       </View>
     </TouchableWithoutFeedback>
   );
@@ -68,20 +103,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center"
   },
-  // inputContainer: {
-  //   width: 400,
-  //   maxWidth: "80%",
-  //   alignItems: "center",
-  //   shadowColor: "grey",
-  //   shadowOffset: { width: 0, height: 2 },
-  //   shadowRadius: 6,
-  //   shadowOpacity: 0.2,
-  //   backgroundColor: "white",
-  //   paddingTop: 20,
-  //   paddingBottom: 20,
-  //   elevation: 5,
-  //   borderRadius: 10
-  // },
   title: {
     fontSize: 25,
     color: "green",
@@ -101,6 +122,10 @@ const styles = StyleSheet.create({
   },
   input: {
     width: 50
+  },
+  summaryContainer: {
+    width: 150,
+    marginTop: 20
   }
 });
 
