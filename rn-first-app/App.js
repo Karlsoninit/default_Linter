@@ -1,15 +1,39 @@
-import React from "react";
-import { StyleSheet, Text, View } from "react-native";
-import Header from "./components/Header/Header";
-import Screen from "./components/Screens/Screens";
+import React, { useState } from "react";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableWithoutFeedback,
+  Keyboard
+} from "react-native";
+import Header from "./components/Header";
+import StartScreensGame from "./components/StartScreensGame";
+import ScreenGame from "./components/ScreenGame";
 
 const App = () => {
-  console.log("guess number");
+  const [userNumber, setUserNumber] = useState();
+  const userNumberHandler = num => {
+    console.log(num);
+    setUserNumber(num);
+  };
+
+  let content = <StartScreensGame onHandleUserNumber={userNumberHandler} />;
+
+  if (userNumber) {
+    content = <ScreenGame userChoice={userNumber} />;
+  }
+
   return (
-    <View style={styles.container}>
-      <Header title={"guess game"} />
-      <Screen />
-    </View>
+    <TouchableWithoutFeedback
+      onPress={() => {
+        Keyboard.dismiss();
+      }}
+    >
+      <View style={styles.container}>
+        <Header title={"guess game"} />
+        {content}
+      </View>
+    </TouchableWithoutFeedback>
   );
 };
 

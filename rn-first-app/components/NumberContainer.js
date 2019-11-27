@@ -1,12 +1,11 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 
-const NumberContainer = ({ selectedNumber }) => {
+const NumberContainer = props => {
   return (
     <View style={styles.summaryContainer}>
-      <Text>you selected</Text>
       <View style={styles.selectContainer}>
-        <Text style={styles.summaryNumber}>{selectedNumber}</Text>
+        <Text style={styles.summaryNumber}>{props.children}</Text>
       </View>
     </View>
   );
