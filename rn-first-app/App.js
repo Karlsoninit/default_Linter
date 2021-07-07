@@ -1,33 +1,47 @@
-import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import React, { useState } from "react";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableWithoutFeedback,
+  Keyboard
+} from "react-native";
+import Header from "./components/Header";
+import StartScreensGame from "./components/StartScreensGame";
+import ScreenGame from "./components/ScreenGame";
 
 const App = () => {
+  const [userNumber, setUserNumber] = useState();
+  const userNumberHandler = num => {
+    console.log(num);
+    setUserNumber(num);
+  };
+
+  let content = <StartScreensGame onHandleUserNumber={userNumberHandler} />;
+
+  if (userNumber) {
+    content = <ScreenGame userChoice={userNumber} />;
+  }
+
   return (
-    <View style={styles.container}>
-      <Text style={styles.textStyle}>default assembly</Text>
-      <Text style={styles.descriptions}>
-        before create new project, you can create new branch and use default
-        assembly
-      </Text>
-    </View>
+    <TouchableWithoutFeedback
+      onPress={() => {
+        Keyboard.dismiss();
+      }}
+    >
+      <View style={styles.container}>
+        <Header title={"guess game"} />
+        {content}
+      </View>
+    </TouchableWithoutFeedback>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
     alignItems: "center",
-    padding: 10
-  },
-  textStyle: {
-    color: "tomato",
-    fontSize: 30,
-    marginBottom: 20
-  },
-  descriptions: {
-    fontSize: 12,
-    color: "black"
+    width: "100%"
   }
 });
 
